@@ -25,7 +25,7 @@ public class IncrementPatternHandler implements PatternHandler {
     private boolean hasValidStartingValue(String value) {
         if (value.equals("*")) return true;
         int startValue = parseInt(value);
-        return startValue >= this.lowerLimit && startValue <= upperLimit;
+        return startValue >= lowerLimit && startValue <= upperLimit;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class IncrementPatternHandler implements PatternHandler {
         String[] values = value.split("/");
         int startValue = values[0].equals("*") ? 0 : parseInt(values[0]);
         int increment = parseInt(values[1]);
-        return Stream.iterate(startValue, i -> i <= this.upperLimit, i -> i + increment)
+        return Stream.iterate(startValue, i -> i <= upperLimit, i -> i + increment)
                 .map(Objects::toString)
                 .collect(Collectors.joining(" "));
     }

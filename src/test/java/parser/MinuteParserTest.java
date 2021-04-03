@@ -21,11 +21,13 @@ class MinuteParserTest {
         PatternHandler listPatternHandler = new ListPatternHandler();
         PatternHandler rangePatternHandler = new RangePatternHandler();
         PatternHandler incrementPatternHandler = new IncrementPatternHandler(0, 59);
+        PatternHandler allPatternHandler = new AllPatternHandler(0, 59);
         parser = new MinuteParser(of(
                 numberPatternHandler,
                 listPatternHandler,
                 rangePatternHandler,
-                incrementPatternHandler)
+                incrementPatternHandler,
+                allPatternHandler)
         );
 
     }
@@ -54,7 +56,6 @@ class MinuteParserTest {
         assertThat(parserResult, equalTo(new ParserResult(MINUTE, "1 11 21 31 41 51")));
     }
 
-    @Disabled
     @Test
     void canParseAnAllValue() {
         ParserResult parserResult = parser.parse("*");
