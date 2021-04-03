@@ -6,10 +6,8 @@ plugins {
 group 'com.laszlobogacsi'
 version '1.0-SNAPSHOT'
 
-ext.javaMainClass = "CronParserApplication"
-
 application {
-    mainClassName = javaMainClass
+    mainClass.set("CronParserApplication")
 }
 
 repositories {
