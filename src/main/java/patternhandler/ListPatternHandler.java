@@ -2,7 +2,7 @@ package patternhandler;
 
 import java.util.regex.Pattern;
 
-public class ListPatterHandler implements PatternHandler {
+public class ListPatternHandler implements PatternHandler {
     Pattern pattern = Pattern.compile("\\d+,\\d+");
     @Override
     public boolean canHandle(String value) {

@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 import static java.lang.Integer.parseInt;
 
-public class RangePatterHandler implements PatternHandler {
+public class RangePatternHandler implements PatternHandler {
     Pattern pattern = Pattern.compile("^\\d{1,2}[-]\\d{1,2}$");
 
     @Override

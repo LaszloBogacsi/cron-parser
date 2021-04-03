@@ -7,12 +7,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-class IncrementPatterHandlerTest {
+class IncrementPatternHandlerTest {
     private PatternHandler handler;
 
     @BeforeEach
     void setUp() {
-        handler = new IncrementPatterHandler(0, 59);
+        handler = new IncrementPatternHandler(0, 59);
     }
 
     @Test
@@ -53,7 +53,7 @@ class IncrementPatterHandlerTest {
 
     @Test
     void returnsFalseWhenStartValueIsLessThanTheLowerLimit() {
-        handler = new IncrementPatterHandler(10, 59);
+        handler = new IncrementPatternHandler(10, 59);
         String expressionPart = "9/20";
         assertThat(handler.canHandle(expressionPart), is(false));
     }
@@ -72,28 +72,28 @@ class IncrementPatterHandlerTest {
 
     @Test
     void returnsTheHandledStringWhenTheIncrementValueIsGreaterThanTheUpperLimit() {
-        handler = new IncrementPatterHandler(0, 59);
+        handler = new IncrementPatternHandler(0, 59);
         String expressionPart = "1/60";
         assertThat(handler.handle(expressionPart), equalTo("1"));
     }
 
     @Test
     void returnsTheHandledStringWhenTheFirstIncrementValueWouldBEGreaterThanTheUpperLimit() {
-        handler = new IncrementPatterHandler(10, 59);
+        handler = new IncrementPatternHandler(10, 59);
         String expressionPart = "50/20";
         assertThat(handler.handle(expressionPart), equalTo("50"));
     }
 
     @Test
     void returnsTheHandledStringWhenTheStartValueIsAnAsterisk() {
-        handler = new IncrementPatterHandler(10, 59);
+        handler = new IncrementPatternHandler(10, 59);
         String expressionPart = "*/10";
         assertThat(handler.handle(expressionPart), equalTo("0 10 20 30 40 50"));
     }
 
     @Test
     void returnsTheHandledStringWhenLastValueIsTheUpperLimit() {
-        handler = new IncrementPatterHandler(10, 59);
+        handler = new IncrementPatternHandler(10, 59);
         String expressionPart = "9/10";
         assertThat(handler.handle(expressionPart), equalTo("9 19 29 39 49 59"));
     }

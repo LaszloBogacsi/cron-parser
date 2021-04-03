@@ -1,7 +1,6 @@
 package parser;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import patternhandler.*;
 
@@ -18,10 +17,10 @@ class MinuteParserTest {
 
     @BeforeEach
     void setUp() {
-        PatternHandler numberPatternHandler = new NumberPatterHandler();
-        PatternHandler listPatternHandler = new ListPatterHandler();
-        PatternHandler rangePatternHandler = new RangePatterHandler();
-        PatternHandler incrementPatternHandler = new IncrementPatterHandler(0, 59);
+        PatternHandler numberPatternHandler = new NumberPatternHandler();
+        PatternHandler listPatternHandler = new ListPatternHandler();
+        PatternHandler rangePatternHandler = new RangePatternHandler();
+        PatternHandler incrementPatternHandler = new IncrementPatternHandler(0, 59);
         parser = new MinuteParser(of(
                 numberPatternHandler,
                 listPatternHandler,

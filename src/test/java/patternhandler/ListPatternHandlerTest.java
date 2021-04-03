@@ -2,19 +2,17 @@ package patternhandler;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import patternhandler.ListPatterHandler;
-import patternhandler.PatternHandler;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-class ListPatterHandlerTest {
+class ListPatternHandlerTest {
     private PatternHandler handler;
 
     @BeforeEach
     void setUp() {
-        handler = new ListPatterHandler();
+        handler = new ListPatternHandler();
     }
 
     @Test

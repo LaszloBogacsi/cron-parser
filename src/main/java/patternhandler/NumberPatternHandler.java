@@ -2,7 +2,7 @@ package patternhandler;
 
 import java.util.regex.Pattern;
 
-public class NumberPatterHandler implements PatternHandler {
+public class NumberPatternHandler implements PatternHandler {
     Pattern pattern = Pattern.compile("^\\d{1,2}$");
 
     @Override

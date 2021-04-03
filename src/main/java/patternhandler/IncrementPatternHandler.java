@@ -7,12 +7,12 @@ import java.util.stream.Stream;
 
 import static java.lang.Integer.parseInt;
 
-public class IncrementPatterHandler implements PatternHandler {
+public class IncrementPatternHandler implements PatternHandler {
     private final int lowerLimit;
     private final int upperLimit;
     Pattern pattern = Pattern.compile("^[\\d{1,2}*][/]\\d{1,2}$");
 
-    public IncrementPatterHandler(int lowerLimit, int upperLimit) {
+    public IncrementPatternHandler(int lowerLimit, int upperLimit) {
         this.lowerLimit = lowerLimit;
         this.upperLimit = upperLimit;
     }

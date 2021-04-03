@@ -7,12 +7,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-class RangePatterHandlerTest {
+class RangePatternHandlerTest {
     private PatternHandler handler;
 
     @BeforeEach
     void setUp() {
-        handler = new RangePatterHandler();
+        handler = new RangePatternHandler();
     }
 
     @Test

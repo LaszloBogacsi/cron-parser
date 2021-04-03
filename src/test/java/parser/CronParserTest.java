@@ -3,7 +3,7 @@ package parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import patternhandler.ListPatterHandler;
+import patternhandler.ListPatternHandler;
 import patternhandler.PatternHandler;
 
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public class CronParserTest {
 
     @BeforeEach
     void setUp() {
-        PatternHandler listPatterHandler = new ListPatterHandler();
+        PatternHandler listPatterHandler = new ListPatternHandler();
         List<Parser> parsers = Arrays.asList(new MinuteParser(of(listPatterHandler)));
         parser = new CronParser(parsers);
     }
