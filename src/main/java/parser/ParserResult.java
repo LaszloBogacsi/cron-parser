@@ -23,4 +23,12 @@ public class ParserResult {
     public int hashCode() {
         return Objects.hash(type, value);
     }
+
+    @Override
+    public String toString() {
+        return "ParserResult{" +
+                "type=" + type +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
