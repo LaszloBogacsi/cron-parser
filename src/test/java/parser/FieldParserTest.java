@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static parser.ParserType.MINUTE;
 
-class MinuteParserTest {
+class FieldParserTest {
     private Parser parser;
 
     @BeforeEach
@@ -23,12 +23,14 @@ class MinuteParserTest {
         PatternHandler rangePatternHandler = new RangePatternHandler(minuteRange);
         PatternHandler incrementPatternHandler = new IncrementPatternHandler(minuteRange);
         PatternHandler allPatternHandler = new AllPatternHandler(minuteRange);
-        parser = new MinuteParser(of(
+        PatternHandler optionalPatternHandler = new OptionalPatternHandler();
+        parser = new FieldParser(MINUTE, of(
                 numberPatternHandler,
                 listPatternHandler,
                 rangePatternHandler,
                 incrementPatternHandler,
-                allPatternHandler)
+                allPatternHandler,
+                optionalPatternHandler)
         );
 
     }
@@ -62,6 +64,12 @@ class MinuteParserTest {
         ParserResult parserResult = parser.parse("*");
         String range0_59 = IntStream.rangeClosed(0, 59).boxed().map(Object::toString).collect(Collectors.joining(" "));
         assertThat(parserResult, equalTo(new ParserResult(MINUTE, range0_59)));
+    }
+
+    @Test
+    void canParseAnOptionalValue() {
+        ParserResult parserResult = parser.parse("?");
+        assertThat(parserResult, equalTo(new ParserResult(MINUTE, "?")));
     }
 
     @Test

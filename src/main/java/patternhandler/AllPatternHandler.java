@@ -5,8 +5,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static java.lang.Integer.parseInt;
-
 public class AllPatternHandler implements PatternHandler {
     Pattern pattern = Pattern.compile("^[*]$");
     private final Range range;

@@ -20,40 +20,84 @@ public class CronParserTest {
     @BeforeEach
     void setUp() {
         Range minuteRange = new Range(0, 59);
-        Parser minuteParser = new MinuteParser(of(
+        Parser minuteParser = new FieldParser(MINUTE, of(
                 new NumberPatternHandler(minuteRange),
                 new ListPatternHandler(minuteRange),
                 new RangePatternHandler(minuteRange),
                 new IncrementPatternHandler(minuteRange),
                 new AllPatternHandler(minuteRange))
         );
+        Range hourRange = new Range(0, 59);
 
-        Parser hourParser = new MinuteParser(of(
-                new NumberPatternHandler(minuteRange),
-                new ListPatternHandler(minuteRange),
-                new RangePatternHandler(minuteRange),
-                new IncrementPatternHandler(minuteRange),
-                new AllPatternHandler(minuteRange))
+        Parser hourParser = new FieldParser(HOUR, of(
+                new NumberPatternHandler(hourRange),
+                new ListPatternHandler(hourRange),
+                new RangePatternHandler(hourRange),
+                new IncrementPatternHandler(hourRange),
+                new AllPatternHandler(hourRange))
         );
 
-        List<Parser> parsers = Arrays.asList(minuteParser);
+        Range dayOfMonthRange = new Range(1, 31);
+
+        Parser dayOfMonthParser = new FieldParser(DAY_OF_MONTH, of(
+                new NumberPatternHandler(dayOfMonthRange),
+                new ListPatternHandler(dayOfMonthRange),
+                new RangePatternHandler(dayOfMonthRange),
+                new IncrementPatternHandler(dayOfMonthRange),
+                new AllPatternHandler(dayOfMonthRange),
+                new OptionalPatternHandler())
+        );
+        Range monthRange = new Range(1, 12);
+
+        Parser monthParser = new FieldParser(MONTH, of(
+                new NumberPatternHandler(monthRange),
+                new ListPatternHandler(monthRange),
+                new RangePatternHandler(monthRange),
+                new IncrementPatternHandler(monthRange),
+                new AllPatternHandler(monthRange))
+        );
+
+        Range dayOfWeekRange = new Range(1, 7);
+
+        Parser dayOfWeekParser = new FieldParser(DAY_OF_WEEK, of(
+                new NumberPatternHandler(dayOfWeekRange),
+                new ListPatternHandler(dayOfWeekRange),
+                new RangePatternHandler(dayOfWeekRange),
+                new IncrementPatternHandler(dayOfWeekRange),
+                new AllPatternHandler(dayOfWeekRange),
+                new OptionalPatternHandler())
+        );
+
+        List<Parser> parsers = Arrays.asList(minuteParser, hourParser, dayOfMonthParser, monthParser, dayOfWeekParser);
         parser = new CronParser(parsers);
     }
 
-    @Disabled
     @Test
-    void canParseASimpleExpression() {
-        List<ParserResult> results = parser.parse(new String[]{"0", "0", "?", "1", "0"});
+    void canParseASimpleExpressionWhereDayOfMonthOptional() {
+        List<ParserResult> results = parser.parse(new String[]{"0", "0", "?", "1", "1"});
 
         assertThat(results, containsInAnyOrder(
                 new ParserResult(MINUTE, "0"),
                 new ParserResult(HOUR, "0"),
                 new ParserResult(DAY_OF_MONTH, "?"),
                 new ParserResult(MONTH, "1"),
-                new ParserResult(DAY_OF_WEEK, "0")));
+                new ParserResult(DAY_OF_WEEK, "1"))
+        );
     }
 
-    @Disabled
+    @Test
+    void canParseASimpleExpressionWithDayOfWeekOptional() {
+        List<ParserResult> results = parser.parse(new String[]{"0", "0", "1", "1", "?"});
+
+        assertThat(results, containsInAnyOrder(
+                new ParserResult(MINUTE, "0"),
+                new ParserResult(HOUR, "0"),
+                new ParserResult(DAY_OF_MONTH, "1"),
+                new ParserResult(MONTH, "1"),
+                new ParserResult(DAY_OF_WEEK, "?"))
+        );
+    }
+
     @Test
     void canParseAComplexExpressionWithIncrementListAndRange() {
         List<ParserResult> results = parser.parse(new String[]{"*/15", "0", "1,15", "*", "1-5"});

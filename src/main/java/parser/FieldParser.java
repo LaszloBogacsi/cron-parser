@@ -6,12 +6,13 @@ import patternhandler.PatternHandler;
 import java.util.List;
 import java.util.Optional;
 
-public class MinuteParser implements Parser {
-    private final ParserType type = ParserType.MINUTE;
+public class FieldParser implements Parser {
+    private final ParserType type;
     private final List<PatternHandler> handlers;
 
-    public MinuteParser(List<PatternHandler> patternHandlers) {
-        handlers = patternHandlers;
+    public FieldParser(ParserType type, List<PatternHandler> patternHandlers) {
+        this.type = type;
+        this.handlers = patternHandlers;
     }
 
     @Override
