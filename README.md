@@ -21,5 +21,25 @@ The input will be on a single line.
 ```shell
 ./gradlew test
 ```
+Location of the test report locally `./build/reports/tests/test/index.html`.
 
-## `Assumtions`
+## `Assumtions, notes`
+
+- **Assumption 1**: The valid ranges for each field:
+```text
+minute        0-59
+hour          0-23
+day of month  1-31
+month         1-12
+day of week   1-7
+```
+- **Assumption 2**: A valid command starts with a `./` or `/`
+  
+- **Note 1**: The following special characters have been implemented:
+```text
+* , - ?
+```
+- **Note 2**: No cross-validation of the correctness of `day of month` and `day of week` regarding the `?` character.
+- **Note 3**: No validation of the correctness of the whole expression 
+    - eg: month: 2, day of month: 31
+- **Note 4**: The `month` and `day of week` fields can only take number representations of month or days.
