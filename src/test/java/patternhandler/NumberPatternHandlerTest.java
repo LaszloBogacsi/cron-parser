@@ -12,7 +12,8 @@ class NumberPatternHandlerTest {
 
     @BeforeEach
     void setUp() {
-        handler = new NumberPatternHandler(0, 59);
+        Range range = new Range(0, 59);
+        handler = new NumberPatternHandler(range);
     }
 
     @Test
@@ -41,14 +42,13 @@ class NumberPatternHandlerTest {
 
     @Test
     void returnsFalseWhenTheNumberIsLessThanTheLowerLimit() {
-        handler = new NumberPatternHandler(10, 59);
+        handler = new NumberPatternHandler(new Range(10, 59));
         String expressionPart = "1";
         assertThat(handler.canHandle(expressionPart), is(false));
     }
 
     @Test
     void returnsFalseWhenTheNumberIsGreaterThanTheUpperLimit() {
-        handler = new NumberPatternHandler(0, 59);
         String expressionPart = "60";
         assertThat(handler.canHandle(expressionPart), is(false));
     }

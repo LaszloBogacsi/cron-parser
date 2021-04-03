@@ -12,7 +12,9 @@ class RangePatternHandlerTest {
 
     @BeforeEach
     void setUp() {
-        handler = new RangePatternHandler(0, 59);
+        Range minuteRange = new Range(0, 59);
+
+        handler = new RangePatternHandler(minuteRange);
     }
 
     @Test
@@ -29,14 +31,13 @@ class RangePatternHandlerTest {
 
     @Test
     void returnsFalseForStartValueLessThanTheLowerLimit() {
-        handler = new RangePatternHandler(10, 59);
+        handler = new RangePatternHandler(new Range(10, 59));
         String expressionPart = "0-59";
         assertThat(handler.canHandle(expressionPart), is(false));
     }
 
     @Test
     void returnsFalseForEndValueGreaterThanTheUpperLimit() {
-        handler = new RangePatternHandler(0, 59);
         String expressionPart = "0-60";
         assertThat(handler.canHandle(expressionPart), is(false));
     }

@@ -12,7 +12,8 @@ class ListPatternHandlerTest {
 
     @BeforeEach
     void setUp() {
-        handler = new ListPatternHandler(0, 59);
+        Range range = new Range(0, 59);
+        handler = new ListPatternHandler(range);
     }
 
     @Test
@@ -35,14 +36,13 @@ class ListPatternHandlerTest {
 
     @Test
     void returnsFalseWhenAnyListValueIsLessThanTheLowerLimit() {
-        handler = new ListPatternHandler(10, 59);
+        handler = new ListPatternHandler(new Range(10, 59));
         String expressionPart = "1,2,10,20";
         assertThat(handler.canHandle(expressionPart), is(false));
     }
 
     @Test
     void returnsFalseWhenAnyListValueIsGreaterThanTheUpperLimit() {
-        handler = new ListPatternHandler(0, 59);
         String expressionPart = "1,2,10,59,65,70";
         assertThat(handler.canHandle(expressionPart), is(false));
     }

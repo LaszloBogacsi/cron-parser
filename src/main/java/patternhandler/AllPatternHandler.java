@@ -9,13 +9,10 @@ import static java.lang.Integer.parseInt;
 
 public class AllPatternHandler implements PatternHandler {
     Pattern pattern = Pattern.compile("^[*]$");
+    private final Range range;
 
-    private final int lowerLimit;
-    private final int upperLimit;
-
-    public AllPatternHandler(int lowerLimit, int upperLimit) {
-        this.lowerLimit = lowerLimit;
-        this.upperLimit = upperLimit;
+    public AllPatternHandler(Range range) {
+        this.range = range;
     }
 
     @Override
@@ -25,7 +22,7 @@ public class AllPatternHandler implements PatternHandler {
 
     @Override
     public String handle(String value) {
-        return IntStream.rangeClosed(lowerLimit, upperLimit)
+        return IntStream.rangeClosed(range.getLowerLimit(), range.getUpperLimit())
                 .boxed()
                 .map(Objects::toString)
                 .collect(Collectors.joining(" "));

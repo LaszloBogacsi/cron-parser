@@ -8,13 +8,11 @@ import java.util.stream.Stream;
 import static java.lang.Integer.parseInt;
 
 public class IncrementPatternHandler implements PatternHandler {
-    private final int lowerLimit;
-    private final int upperLimit;
     Pattern pattern = Pattern.compile("^(\\d+|[*])[/]\\d+$");
+    private final Range range;
 
-    public IncrementPatternHandler(int lowerLimit, int upperLimit) {
-        this.lowerLimit = lowerLimit;
-        this.upperLimit = upperLimit;
+    public IncrementPatternHandler(Range range) {
+        this.range = range;
     }
 
     @Override
@@ -25,7 +23,7 @@ public class IncrementPatternHandler implements PatternHandler {
     private boolean hasValidStartingValue(String value) {
         if (value.equals("*")) return true;
         int startValue = parseInt(value);
-        return startValue >= lowerLimit && startValue <= upperLimit;
+        return startValue >= range.getLowerLimit() && startValue <= range.getUpperLimit();
     }
 
     @Override
@@ -33,7 +31,7 @@ public class IncrementPatternHandler implements PatternHandler {
         String[] values = value.split("/");
         int startValue = values[0].equals("*") ? 0 : parseInt(values[0]);
         int increment = parseInt(values[1]);
-        return Stream.iterate(startValue, i -> i <= upperLimit, i -> i + increment)
+        return Stream.iterate(startValue, i -> i <= range.getUpperLimit(), i -> i + increment)
                 .map(Objects::toString)
                 .collect(Collectors.joining(" "));
     }

@@ -17,11 +17,12 @@ class MinuteParserTest {
 
     @BeforeEach
     void setUp() {
-        PatternHandler numberPatternHandler = new NumberPatternHandler(0, 59);
-        PatternHandler listPatternHandler = new ListPatternHandler(0, 59);
-        PatternHandler rangePatternHandler = new RangePatternHandler(0, 59);
-        PatternHandler incrementPatternHandler = new IncrementPatternHandler(0, 59);
-        PatternHandler allPatternHandler = new AllPatternHandler(0, 59);
+        Range minuteRange = new Range(0, 59);
+        PatternHandler numberPatternHandler = new NumberPatternHandler(minuteRange);
+        PatternHandler listPatternHandler = new ListPatternHandler(minuteRange);
+        PatternHandler rangePatternHandler = new RangePatternHandler(minuteRange);
+        PatternHandler incrementPatternHandler = new IncrementPatternHandler(minuteRange);
+        PatternHandler allPatternHandler = new AllPatternHandler(minuteRange);
         parser = new MinuteParser(of(
                 numberPatternHandler,
                 listPatternHandler,

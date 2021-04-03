@@ -4,14 +4,11 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class ListPatternHandler implements PatternHandler {
-    private final int lowerLimit;
-    private final int upperLimit;
     Pattern pattern = Pattern.compile("^(\\d*[,])+\\d+$");
+    private final Range range;
 
-    public ListPatternHandler(int lowerLimit, int upperLimit) {
-
-        this.lowerLimit = lowerLimit;
-        this.upperLimit = upperLimit;
+    public ListPatternHandler(Range range) {
+        this.range = range;
     }
 
     @Override
@@ -27,6 +24,6 @@ public class ListPatternHandler implements PatternHandler {
     private boolean isInValidRange(String value) {
         return Arrays.stream(value.split(","))
                 .mapToInt(Integer::parseInt)
-                .allMatch(item -> lowerLimit <= item && item <= upperLimit);
+                .allMatch(item -> range.getLowerLimit() <= item && item <= range.getUpperLimit());
     }
 }

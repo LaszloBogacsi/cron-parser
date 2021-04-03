@@ -12,7 +12,8 @@ class AllPatternHandlerTest {
 
     @BeforeEach
     void setUp() {
-        handler = new AllPatternHandler(0, 59);
+        Range range = new Range(0, 59);
+        handler = new AllPatternHandler(range);
     }
 
     @Test
@@ -36,7 +37,7 @@ class AllPatternHandlerTest {
 
     @Test
     void returnsTheHandledStringFormattedWithWhiteSpace() {
-        handler = new AllPatternHandler(0, 10);
+        handler = new AllPatternHandler(new Range(0, 10));
         String expressionPart = "*";
         assertThat(handler.handle(expressionPart), equalTo("0 1 2 3 4 5 6 7 8 9 10"));
     }

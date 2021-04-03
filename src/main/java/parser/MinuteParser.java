@@ -21,7 +21,7 @@ public class MinuteParser implements Parser {
                 .findFirst();
         return maybeHandler
                 .map(patternHandler -> new ParserResult(type, patternHandler.handle(value)))
-                .orElseGet(() -> new ParserResult(type, "No Handler Found For: " + value)); // No handler found return original value
+                .orElseGet(() -> new ParserResult(type, "No Handler Found For: " + value));
 
     }
 

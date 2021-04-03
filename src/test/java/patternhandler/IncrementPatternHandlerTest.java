@@ -12,7 +12,8 @@ class IncrementPatternHandlerTest {
 
     @BeforeEach
     void setUp() {
-        handler = new IncrementPatternHandler(0, 59);
+        Range range = new Range(0, 59);
+        handler = new IncrementPatternHandler(range);
     }
 
     @Test
@@ -41,7 +42,7 @@ class IncrementPatternHandlerTest {
 
     @Test
     void returnsFalseWhenStartValueIsLessThanTheLowerLimit() {
-        handler = new IncrementPatternHandler(10, 59);
+        handler = new IncrementPatternHandler(new Range(10, 59));
         String expressionPart = "9/20";
         assertThat(handler.canHandle(expressionPart), is(false));
     }
@@ -60,28 +61,27 @@ class IncrementPatternHandlerTest {
 
     @Test
     void returnsTheHandledStringWhenTheIncrementValueIsGreaterThanTheUpperLimit() {
-        handler = new IncrementPatternHandler(0, 59);
         String expressionPart = "1/60";
         assertThat(handler.handle(expressionPart), equalTo("1"));
     }
 
     @Test
     void returnsTheHandledStringWhenTheFirstIncrementValueWouldBEGreaterThanTheUpperLimit() {
-        handler = new IncrementPatternHandler(10, 59);
+        handler = new IncrementPatternHandler(new Range(10, 59));
         String expressionPart = "50/20";
         assertThat(handler.handle(expressionPart), equalTo("50"));
     }
 
     @Test
     void returnsTheHandledStringWhenTheStartValueIsAnAsterisk() {
-        handler = new IncrementPatternHandler(10, 59);
+        handler = new IncrementPatternHandler(new Range(10, 59));
         String expressionPart = "*/10";
         assertThat(handler.handle(expressionPart), equalTo("0 10 20 30 40 50"));
     }
 
     @Test
     void returnsTheHandledStringWhenLastValueIsTheUpperLimit() {
-        handler = new IncrementPatternHandler(10, 59);
+        handler = new IncrementPatternHandler(new Range(10, 59));
         String expressionPart = "9/10";
         assertThat(handler.handle(expressionPart), equalTo("9 19 29 39 49 59"));
     }
