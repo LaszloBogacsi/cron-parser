@@ -1,7 +1,6 @@
 package parser;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import patternhandler.*;
 
@@ -27,6 +26,7 @@ public class CronParserTest {
                 new IncrementPatternHandler(minuteRange),
                 new AllPatternHandler(minuteRange))
         );
+
         Range hourRange = new Range(0, 59);
 
         Parser hourParser = new FieldParser(HOUR, of(
@@ -108,5 +108,31 @@ public class CronParserTest {
                 new ParserResult(DAY_OF_MONTH, "1 15"),
                 new ParserResult(MONTH, "1 2 3 4 5 6 7 8 9 10 11 12"),
                 new ParserResult(DAY_OF_WEEK, "1 2 3 4 5")));
+    }
+
+
+    @Test
+    void canParseAsManyFieldAsManyParsersItHas() {
+        List<ParserResult> results = parser.parse(new String[]{"0", "0", "1", "1", "?", "extrafield"});
+
+        assertThat(results, containsInAnyOrder(
+                new ParserResult(MINUTE, "0"),
+                new ParserResult(HOUR, "0"),
+                new ParserResult(DAY_OF_MONTH, "1"),
+                new ParserResult(MONTH, "1"),
+                new ParserResult(DAY_OF_WEEK, "?"))
+        );
+    }
+
+    @Test
+    void canParseLessFieldsThenParsersItHas() {
+        List<ParserResult> results = parser.parse(new String[]{"0", "0", "1", "1"});
+
+        assertThat(results, containsInAnyOrder(
+                new ParserResult(MINUTE, "0"),
+                new ParserResult(HOUR, "0"),
+                new ParserResult(DAY_OF_MONTH, "1"),
+                new ParserResult(MONTH, "1"))
+        );
     }
 }
