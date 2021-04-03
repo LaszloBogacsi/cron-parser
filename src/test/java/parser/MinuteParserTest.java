@@ -17,7 +17,7 @@ class MinuteParserTest {
 
     @BeforeEach
     void setUp() {
-        PatternHandler numberPatternHandler = new NumberPatternHandler();
+        PatternHandler numberPatternHandler = new NumberPatternHandler(0, 59);
         PatternHandler listPatternHandler = new ListPatternHandler();
         PatternHandler rangePatternHandler = new RangePatternHandler();
         PatternHandler incrementPatternHandler = new IncrementPatternHandler(0, 59);
