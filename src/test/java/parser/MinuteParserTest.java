@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.util.List.of;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static parser.ParserType.MINUTE;
@@ -16,8 +17,9 @@ class MinuteParserTest {
 
     @BeforeEach
     void setUp() {
+        PatternHandler numberPatternHandler = new NumberPatterHandler();
         PatternHandler listPatternHandler = new ListPatterHandler();
-        parser = new MinuteParser(listPatternHandler);
+        parser = new MinuteParser(of(numberPatternHandler, listPatternHandler));
 
     }
 
@@ -60,5 +62,11 @@ class MinuteParserTest {
         ParserResult parserResult = parser.parse("*");
         String range0_59 = IntStream.rangeClosed(0, 59).boxed().map(Object::toString).collect(Collectors.joining(" "));
         assertThat(parserResult, equalTo(new ParserResult(MINUTE, range0_59)));
+    }
+
+    @Test
+    void returnsTheOriginalValueWhenNoSuitableHandlerFound() {
+        ParserResult parserResult = parser.parse("1-,5");
+        assertThat(parserResult, equalTo(new ParserResult(MINUTE, "No Handler Found For: 1-,5")));
     }
 }

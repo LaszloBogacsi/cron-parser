@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.List.of;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static parser.ParserType.*;
@@ -17,7 +18,7 @@ public class CronParserTest {
     @BeforeEach
     void setUp() {
         PatternHandler listPatterHandler = new ListPatterHandler();
-        List<Parser> parsers = Arrays.asList(new MinuteParser(listPatterHandler));
+        List<Parser> parsers = Arrays.asList(new MinuteParser(of(listPatterHandler)));
         parser = new CronParser(parsers);
     }
 
