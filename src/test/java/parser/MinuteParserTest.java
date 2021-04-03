@@ -19,7 +19,7 @@ class MinuteParserTest {
     void setUp() {
         PatternHandler numberPatternHandler = new NumberPatternHandler(0, 59);
         PatternHandler listPatternHandler = new ListPatternHandler(0, 59);
-        PatternHandler rangePatternHandler = new RangePatternHandler();
+        PatternHandler rangePatternHandler = new RangePatternHandler(0, 59);
         PatternHandler incrementPatternHandler = new IncrementPatternHandler(0, 59);
         PatternHandler allPatternHandler = new AllPatternHandler(0, 59);
         parser = new MinuteParser(of(

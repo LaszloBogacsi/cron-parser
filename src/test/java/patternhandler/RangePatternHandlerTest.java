@@ -12,7 +12,7 @@ class RangePatternHandlerTest {
 
     @BeforeEach
     void setUp() {
-        handler = new RangePatternHandler();
+        handler = new RangePatternHandler(0, 59);
     }
 
     @Test
@@ -28,14 +28,16 @@ class RangePatternHandlerTest {
     }
 
     @Test
-    void returnsFalseForMoreThanTwoDigitsOnBothEnds() {
-        String expressionPart = "111-112";
+    void returnsFalseForStartValueLessThanTheLowerLimit() {
+        handler = new RangePatternHandler(10, 59);
+        String expressionPart = "0-59";
         assertThat(handler.canHandle(expressionPart), is(false));
     }
 
     @Test
-    void returnsFalseForMoreThanTwoDigitsOnTheStartEnd() {
-        String expressionPart = "111-10";
+    void returnsFalseForEndValueGreaterThanTheUpperLimit() {
+        handler = new RangePatternHandler(0, 59);
+        String expressionPart = "0-60";
         assertThat(handler.canHandle(expressionPart), is(false));
     }
 

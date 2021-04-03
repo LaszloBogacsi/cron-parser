@@ -8,7 +8,14 @@ import java.util.stream.IntStream;
 import static java.lang.Integer.parseInt;
 
 public class RangePatternHandler implements PatternHandler {
-    Pattern pattern = Pattern.compile("^\\d{1,2}[-]\\d{1,2}$");
+    private final int lowerLimit;
+    private final int upperLimit;
+    Pattern pattern = Pattern.compile("^\\d+[-]\\d+$");
+
+    public RangePatternHandler(int lowerLimit, int upperLimit) {
+        this.lowerLimit = lowerLimit;
+        this.upperLimit = upperLimit;
+    }
 
     @Override
     public boolean canHandle(String value) {
@@ -26,6 +33,8 @@ public class RangePatternHandler implements PatternHandler {
 
     private boolean isValidRange(String range) {
         String[] rangeLimits = range.split("-");
-        return parseInt(rangeLimits[0]) <= parseInt(rangeLimits[1]);
+        int lowerValue = parseInt(rangeLimits[0]);
+        int upperValue = parseInt(rangeLimits[1]);
+        return lowerValue <= upperValue && lowerLimit <= lowerValue && upperValue <= upperLimit;
     }
 }
