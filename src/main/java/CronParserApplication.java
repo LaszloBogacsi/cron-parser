@@ -1,22 +1,25 @@
-import parser.CronParser;
-import parser.FieldParser;
-import parser.Parser;
-import parser.ParserResult;
+import parser.*;
 import patternhandler.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.List.of;
 import static parser.ParserType.*;
 
 public class CronParserApplication {
+    private static final int firstColumnWidth = 14;
+
     public static void main(String[] args) {
         CronParser cronParser = makeParser();
+        ResultFormatter formatter = new ResultFormatter(firstColumnWidth);
         List<ParserResult> parserResults = cronParser.parse(args);
-        for (ParserResult parserResult : parserResults) {
-            System.out.println("parserResult = " + parserResult);
-        }
+
+        String tableOutput = parserResults.stream()
+                .map(formatter::format)
+                .collect(Collectors.joining("\n"));
+        System.out.println(tableOutput);
     }
 
     private static CronParser makeParser() {

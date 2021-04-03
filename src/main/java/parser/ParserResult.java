@@ -11,6 +11,14 @@ public class ParserResult {
         this.value = value;
     }
 
+    public ParserType getType() {
+        return type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
