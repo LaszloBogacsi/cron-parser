@@ -24,13 +24,15 @@ class FieldParserTest {
         PatternHandler incrementPatternHandler = new IncrementPatternHandler(minuteRange);
         PatternHandler allPatternHandler = new AllPatternHandler(minuteRange);
         PatternHandler optionalPatternHandler = new OptionalPatternHandler();
+        PatternHandler anyPatternHandler = new CommandPatternHandler();
         parser = new FieldParser(MINUTE, of(
                 numberPatternHandler,
                 listPatternHandler,
                 rangePatternHandler,
                 incrementPatternHandler,
                 allPatternHandler,
-                optionalPatternHandler)
+                optionalPatternHandler,
+                anyPatternHandler)
         );
 
     }
@@ -77,4 +79,12 @@ class FieldParserTest {
         ParserResult parserResult = parser.parse("1-,5");
         assertThat(parserResult, equalTo(new ParserResult(MINUTE, "No Handler Found For: 1-,5")));
     }
+
+
+    @Test
+    void canParseACommandValue() {
+        ParserResult parserResult = parser.parse("/some/test/command");
+        assertThat(parserResult, equalTo(new ParserResult(MINUTE, "/some/test/command")));
+    }
+
 }

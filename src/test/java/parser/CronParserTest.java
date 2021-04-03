@@ -67,8 +67,9 @@ public class CronParserTest {
                 new AllPatternHandler(dayOfWeekRange),
                 new OptionalPatternHandler())
         );
+        Parser commandParser = new FieldParser(COMMAND, of(new CommandPatternHandler()));
 
-        List<Parser> parsers = Arrays.asList(minuteParser, hourParser, dayOfMonthParser, monthParser, dayOfWeekParser);
+        List<Parser> parsers = Arrays.asList(minuteParser, hourParser, dayOfMonthParser, monthParser, dayOfWeekParser, commandParser);
         parser = new CronParser(parsers);
     }
 
@@ -112,15 +113,30 @@ public class CronParserTest {
 
 
     @Test
-    void canParseAsManyFieldAsManyParsersItHas() {
-        List<ParserResult> results = parser.parse(new String[]{"0", "0", "1", "1", "?", "extrafield"});
+    void canParseASimpleExpressionWithCommand() {
+        List<ParserResult> results = parser.parse(new String[]{"0", "0", "1", "1", "?", "/test/command"});
 
         assertThat(results, containsInAnyOrder(
                 new ParserResult(MINUTE, "0"),
                 new ParserResult(HOUR, "0"),
                 new ParserResult(DAY_OF_MONTH, "1"),
                 new ParserResult(MONTH, "1"),
-                new ParserResult(DAY_OF_WEEK, "?"))
+                new ParserResult(DAY_OF_WEEK, "?"),
+                new ParserResult(COMMAND, "/test/command"))
+        );
+    }
+
+    @Test
+    void canParseAsManyFieldAsManyParsersItHas() {
+        List<ParserResult> results = parser.parse(new String[]{"0", "0", "1", "1", "?", "./test/command", "extrafield"});
+
+        assertThat(results, containsInAnyOrder(
+                new ParserResult(MINUTE, "0"),
+                new ParserResult(HOUR, "0"),
+                new ParserResult(DAY_OF_MONTH, "1"),
+                new ParserResult(MONTH, "1"),
+                new ParserResult(DAY_OF_WEEK, "?"),
+                new ParserResult(COMMAND, "./test/command"))
         );
     }
 
