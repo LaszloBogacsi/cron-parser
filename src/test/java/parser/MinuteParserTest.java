@@ -19,7 +19,8 @@ class MinuteParserTest {
     void setUp() {
         PatternHandler numberPatternHandler = new NumberPatterHandler();
         PatternHandler listPatternHandler = new ListPatterHandler();
-        parser = new MinuteParser(of(numberPatternHandler, listPatternHandler));
+        PatternHandler rangePatternHandler = new RangePatterHandler();
+        parser = new MinuteParser(of(numberPatternHandler, listPatternHandler, rangePatternHandler));
 
     }
 
@@ -35,7 +36,6 @@ class MinuteParserTest {
         assertThat(parserResult, equalTo(new ParserResult(MINUTE, "1 2")));
     }
 
-    @Disabled
     @Test
     void canParseARangeValue() {
         ParserResult parserResult = parser.parse("1-5");

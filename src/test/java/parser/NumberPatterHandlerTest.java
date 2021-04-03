@@ -28,7 +28,7 @@ class NumberPatterHandlerTest {
     }
 
     @Test
-    void returnsFalseWhenThePatterDoesNotMatches() {
+    void returnsFalseForMoreThanTwoDigits() {
         String expressionPart = "111";
         assertThat(handler.canHandle(expressionPart), is(false));
     }
