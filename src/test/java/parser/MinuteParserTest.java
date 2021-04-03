@@ -3,6 +3,10 @@ package parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import patternhandler.ListPatterHandler;
+import patternhandler.NumberPatterHandler;
+import patternhandler.PatternHandler;
+import patternhandler.RangePatterHandler;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

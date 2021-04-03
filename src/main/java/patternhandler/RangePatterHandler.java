@@ -1,4 +1,4 @@
-package parser;
+package patternhandler;
 
 import java.util.Objects;
 import java.util.regex.Pattern;

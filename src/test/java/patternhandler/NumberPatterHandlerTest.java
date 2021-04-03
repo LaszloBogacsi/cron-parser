@@ -1,7 +1,9 @@
-package parser;
+package patternhandler;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import patternhandler.NumberPatterHandler;
+import patternhandler.PatternHandler;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

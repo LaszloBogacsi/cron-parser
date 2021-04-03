@@ -1,4 +1,4 @@
-package parser;
+package patternhandler;
 
 public interface PatternHandler {
     boolean canHandle(String value);
