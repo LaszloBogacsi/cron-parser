@@ -2,8 +2,6 @@ package patternhandler;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import patternhandler.PatternHandler;
-import patternhandler.RangePatterHandler;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
