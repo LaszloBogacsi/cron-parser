@@ -3,10 +3,7 @@ package parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import patternhandler.ListPatterHandler;
-import patternhandler.NumberPatterHandler;
-import patternhandler.PatternHandler;
-import patternhandler.RangePatterHandler;
+import patternhandler.*;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -24,7 +21,13 @@ class MinuteParserTest {
         PatternHandler numberPatternHandler = new NumberPatterHandler();
         PatternHandler listPatternHandler = new ListPatterHandler();
         PatternHandler rangePatternHandler = new RangePatterHandler();
-        parser = new MinuteParser(of(numberPatternHandler, listPatternHandler, rangePatternHandler));
+        PatternHandler incrementPatternHandler = new IncrementPatterHandler();
+        parser = new MinuteParser(of(
+                numberPatternHandler,
+                listPatternHandler,
+                rangePatternHandler,
+                incrementPatternHandler)
+        );
 
     }
 
@@ -46,18 +49,10 @@ class MinuteParserTest {
         assertThat(parserResult, equalTo(new ParserResult(MINUTE, "1 2 3 4 5")));
     }
 
-    @Disabled
     @Test
-    void canParseAnIncrementRangeValueWithStartValue() {
+    void canParseAnIncrementRangeValue() {
         ParserResult parserResult = parser.parse("1/10");
         assertThat(parserResult, equalTo(new ParserResult(MINUTE, "1 11 21 31 41 51")));
-    }
-
-    @Disabled
-    @Test
-    void canParseAnIncrementRangeValueWithoutStartValue() {
-        ParserResult parserResult = parser.parse("*/10");
-        assertThat(parserResult, equalTo(new ParserResult(MINUTE, "0 10 20 30 40 50")));
     }
 
     @Disabled

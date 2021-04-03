@@ -24,6 +24,7 @@ public class CronParserTest {
         List<Parser> parsers = Arrays.asList(new MinuteParser(of(listPatterHandler)));
         parser = new CronParser(parsers);
     }
+
     @Disabled
     @Test
     void canParseASimpleExpression() {
