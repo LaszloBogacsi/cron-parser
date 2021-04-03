@@ -34,18 +34,6 @@ class IncrementPatternHandlerTest {
     }
 
     @Test
-    void returnsFalseForMoreThanTwoDigitStartingValue() {
-        String expressionPart = "100/20";
-        assertThat(handler.canHandle(expressionPart), is(false));
-    }
-
-    @Test
-    void returnsFalseForMoreThanTwoDigitIncrementValue() {
-        String expressionPart = "10/200";
-        assertThat(handler.canHandle(expressionPart), is(false));
-    }
-
-    @Test
     void returnsFalseForMalformedValue() {
         String expressionPart = "1*/20";
         assertThat(handler.canHandle(expressionPart), is(false));
