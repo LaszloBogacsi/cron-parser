@@ -12,7 +12,7 @@ class ListPatternHandlerTest {
 
     @BeforeEach
     void setUp() {
-        handler = new ListPatternHandler();
+        handler = new ListPatternHandler(0, 59);
     }
 
     @Test
@@ -22,8 +22,28 @@ class ListPatternHandlerTest {
     }
 
     @Test
-    void returnsFalseWhenThePatterDoesNotMatches() {
+    void returnsTrueForAListOfThree() {
+        String expressionPart = "1,2,3";
+        assertThat(handler.canHandle(expressionPart), is(true));
+    }
+
+    @Test
+    void returnsFalseWhenThePatterDoesNotMatch() {
         String expressionPart = "1";
+        assertThat(handler.canHandle(expressionPart), is(false));
+    }
+
+    @Test
+    void returnsFalseWhenAnyListValueIsLessThanTheLowerLimit() {
+        handler = new ListPatternHandler(10, 59);
+        String expressionPart = "1,2,10,20";
+        assertThat(handler.canHandle(expressionPart), is(false));
+    }
+
+    @Test
+    void returnsFalseWhenAnyListValueIsGreaterThanTheUpperLimit() {
+        handler = new ListPatternHandler(0, 59);
+        String expressionPart = "1,2,10,59,65,70";
         assertThat(handler.canHandle(expressionPart), is(false));
     }
 

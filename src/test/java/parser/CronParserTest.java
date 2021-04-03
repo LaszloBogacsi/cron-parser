@@ -20,7 +20,7 @@ public class CronParserTest {
 
     @BeforeEach
     void setUp() {
-        PatternHandler listPatterHandler = new ListPatternHandler();
+        PatternHandler listPatterHandler = new ListPatternHandler(0, 59);
         List<Parser> parsers = Arrays.asList(new MinuteParser(of(listPatterHandler)));
         parser = new CronParser(parsers);
     }
