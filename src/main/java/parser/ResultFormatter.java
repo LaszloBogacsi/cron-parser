@@ -4,8 +4,8 @@ import java.util.Map;
 
 public class ResultFormatter {
     private final char padding = ' ';
-    private int firstColumnWidth;
-    private static Map<ParserType, String> fieldNames = Map.of(
+    private final int firstColumnWidth;
+    private static final Map<ParserType, String> fieldNames = Map.of(
             ParserType.MINUTE, "minute",
             ParserType.HOUR, "hour",
             ParserType.DAY_OF_MONTH, "day of month",
