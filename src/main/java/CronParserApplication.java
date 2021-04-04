@@ -32,7 +32,7 @@ public class CronParserApplication {
                 new AllPatternHandler(minuteRange))
         );
 
-        Range hourRange = new Range(0, 59);
+        Range hourRange = new Range(0, 23);
 
         Parser hourParser = new FieldParser(HOUR, of(
                 new NumberPatternHandler(hourRange),
