@@ -41,5 +41,9 @@ day of week   1-7
 ```
 - **Note 2**: No cross-validation of the correctness of `day of month` and `day of week` regarding the `?` character.
 - **Note 3**: No validation of the correctness of the whole expression 
-    - eg: month: 2, day of month: 31
+  - eg.: month: 2, day of month: 31
 - **Note 4**: The `month` and `day of week` fields can only take number representations of month or days.
+- **Note 5**: No extensive error handling had been implemented, in case a part of an input can not be handled it just prints a message to the output for the field
+  - eg.:`day of month  No Handler Found For: <unhandled input value>`
+- **Note 6**: Parsable but invalid values (out of valid range) are currently rejected with the same message 
+    - eg.:`month  No Handler Found For: 99`
