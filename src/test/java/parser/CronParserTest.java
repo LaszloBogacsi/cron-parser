@@ -7,9 +7,11 @@ import patternhandler.*;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Collections.emptyList;
 import static java.util.List.of;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.is;
 import static parser.ParserType.*;
 
 
@@ -150,5 +152,11 @@ public class CronParserTest {
                 new ParserResult(DAY_OF_MONTH, "1"),
                 new ParserResult(MONTH, "1"))
         );
+    }
+
+    @Test
+    void canParseEmptyInput() {
+        List<ParserResult> results = parser.parse(new String[]{});
+        assertThat(results, is(emptyList()));
     }
 }
