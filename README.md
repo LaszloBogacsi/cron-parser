@@ -23,7 +23,7 @@ The input will be on a single line.
 ```
 Location of the test report locally `./build/reports/tests/test/index.html`.
 
-## `Assumtions, notes`
+## `Assumptions, notes`
 
 - **Assumption 1**: The valid ranges for each field:
 ```text
