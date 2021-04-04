@@ -29,7 +29,7 @@ public class IncrementPatternHandler implements PatternHandler {
     @Override
     public String handle(String value) {
         String[] values = value.split("/");
-        int startValue = values[0].equals("*") ? 0 : parseInt(values[0]);
+        int startValue = values[0].equals("*") ? range.getLowerLimit() : parseInt(values[0]);
         int increment = parseInt(values[1]);
         return Stream.iterate(startValue, i -> i <= range.getUpperLimit(), i -> i + increment)
                 .map(Objects::toString)

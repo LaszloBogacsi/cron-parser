@@ -76,7 +76,7 @@ class IncrementPatternHandlerTest {
     void returnsTheHandledStringWhenTheStartValueIsAnAsterisk() {
         handler = new IncrementPatternHandler(new Range(10, 59));
         String expressionPart = "*/10";
-        assertThat(handler.handle(expressionPart), equalTo("0 10 20 30 40 50"));
+        assertThat(handler.handle(expressionPart), equalTo("10 20 30 40 50"));
     }
 
     @Test
